@@ -1,8 +1,10 @@
 import json
+import os
 import datetime
 
 from uktrains import *
 
+dir = os.path.dirname(__file__)
 FROM = 'CHX'
 
 def to_int(s):
@@ -13,7 +15,7 @@ def to_int(s):
     t = 60 * h + m
     return t
 
-data = json.load(open('train_data_{}.json'.format(FROM)))
+data = json.load(open(os.path.join(dir, 'train_data_{}.json'.format(FROM))))
 js = [Journey(*j) for j in data]
 
 now = datetime.datetime.now()  # - datetime.timedelta(minutes=20)
