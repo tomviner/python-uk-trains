@@ -26,11 +26,6 @@ setup(
     namespace_packages=[],
     include_package_data=False,
     zip_safe=False,
-    install_requires=[
-        'requests',
-        'requests_cache',
-        'lxml',
-        'cssselect',
-    ],
+    install_requires=['requests', 'requests_cache', 'lxml', 'cssselect'],
     tests_require=[],
 )

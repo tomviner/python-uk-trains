@@ -1,8 +1,3 @@
-#!/usr/bin/env python
-# encoding: utf-8
-
-from __future__ import unicode_literals
-
 import datetime
 import json
 import logging
@@ -10,7 +5,7 @@ import re
 import sys
 
 from collections import namedtuple
-from cStringIO import StringIO
+from io import StringIO
 
 import requests
 import requests_cache
@@ -81,7 +76,7 @@ def _http_get(url):
     logging.debug(url)
     response = requests.get(url)
     response.raise_for_status()
-    return StringIO(response.content)
+    return StringIO(response.content.decode())
 
 
 def search_trains(from_name, to_name, **kwargs):
@@ -132,7 +127,7 @@ def _parse_station_from_tr(tr):
             from_platform = None
 
     except IndexError:
-        print(lxml.html.tostring(tr))
+        print((lxml.html.tostring(tr)))
         raise
 
     return Journey(
@@ -176,6 +171,7 @@ def _parse_status(td_content):
     u'disrupted'
     """
     return td_content.strip().split('\n')[0].strip()
+
 
 if __name__ == '__main__':
     main(' '.join(sys.argv[1:]))
